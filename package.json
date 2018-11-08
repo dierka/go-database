@@ -1,0 +1,25 @@
+{
+  "name": "go-database",
+  "version": "1.0.0",
+  "description": "Database connection factory",
+  "main": "./src/bin/odin-database.js",
+  "directories": {
+    "lib": "/src/lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dierka/go-database.git"
+  },
+  "keywords": [
+    "connection",
+    "factory",
+    "database",
+    "db",
+    "connector"
+  ],
+  "author": "Felipe Dierka",
+  "license": "ISC",
+  "dependencies": {
+    "mssql": "4.2.2"
+  }
+}
