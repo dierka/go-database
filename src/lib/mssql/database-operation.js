@@ -14,13 +14,27 @@ module.exports = {
 
             statement.prepare(sqlInstruction.sqlCommand).then((preparedStatement) => {
 
-                preparedStatement.execute(parameters).then((data) => {
+                if (!Array.isArray(parameters)) {
+                    parameters = [parameters];
+                }
 
-                    preparedStatement.unprepare().then(() => {
+                if (parameters.length == 0) {
+                    parameters.push({});
+                }
 
-                        return resolve(data);
+                return parameters.reduce((promiseChain, parameter) => {
+                    return promiseChain.then(chainResults =>
+                        preparedStatement.execute(parameter).then(result =>
+                            [ ...chainResults, result ]
+                        )
+                    );
+                }, Promise.resolve([])).then(arrayOfResults => {
 
-                    });
+                        preparedStatement.unprepare().then(() => {
+
+                            return resolve(arrayOfResults);
+
+                        });
 
                 }).catch((err) => {
 
@@ -44,17 +58,17 @@ module.exports = {
 
             this.executeInstruction(sqlInstruction, parameters, transaction).then((data) => {
 
-                if (data.recordset.length == 0) {
+                if (data.length == 0 || data[0].recordset.length == 0) {
 
                     return reject('Nenhum resultado.');
 
-                } else if (data.recordset.length > 1) {
+                } else if (data.length > 1 || data[0].recordset.length > 1) {
 
                     return reject('Encontrado mais de um resultado.');
 
                 } else {
 
-                    return resolve(data.recordset[0]);
+                    return resolve(data[0].recordset[0]);
 
                 }
 
@@ -70,33 +84,49 @@ module.exports = {
 
     getList(sqlInstruction, parameters, transaction) {
 
-        return this.executeInstruction(sqlInstruction, parameters, transaction);
+        return new Promise((resolve, reject) => {
+
+            return this.executeInstruction(sqlInstruction, parameters, transaction).then((data) => {
+
+                let output = [];
+
+                data.map(a => {
+                    output.push(...a.recordset)
+                });
+
+                if (output.length == 1) {
+                    output = output[0];
+                }
+
+                return resolve(output);
+
+            }).catch((err) => {
+
+                return reject(err);
+
+            });
+
+        });
 
     },
 
-    insertObject(sqlInstruction, parameters, transaction) {
+    insert(sqlInstruction, parameters, transaction) {
 
         return new Promise((resolve, reject) => {
 
             this.executeInstruction(sqlInstruction, parameters, transaction).then((data) => {
 
-                if (data.rowsAffected == 0) {
+                let output = [];
 
-                    return reject('Nenhum registro afetado');
+                data.map(a => {
+                    output.push(...a.recordset)
+                });
 
-                } else if (!data.recordset || data.recordset.length == 0) {
-
-                    return reject('Nenhum output foi definido');
-
-                } else if (data.rowsAffected > 1 || data.recordset.length > 1) {
-
-                    return reject('Mais de um registro foi afetado.');
-
-                } else {
-
-                    return resolve(data.recordset[0]);
-
+                if (output.length == 1) {
+                    output = output[0];
                 }
+
+                return resolve(output);
 
             }).catch((err) => {
 
@@ -106,11 +136,6 @@ module.exports = {
 
         });
 
-    },
-
-    insertList(sqlInstruction, parameters, transaction) {
-
-        // todo - criar operação que aproveite o mesmo statement.
     }
 
 };

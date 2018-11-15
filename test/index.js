@@ -27,7 +27,17 @@ lib.mssql.connectionFactory.createConnection(config).then((c) => {
 
 }).then(() => {
 
-    return dropTables();
+    return insertListRecords();
+
+}).then((data) => {
+
+    return getListRecords();
+
+}).then(() => {
+
+// }).then(() => {
+
+    // return dropTables();
 
 }).catch((err) => {
 
@@ -86,7 +96,7 @@ function insertOneRecord() {
 
         transaction = t;
 
-        return lib.mssql.databaseOperation.insertObject(scripts.insertRecord, {ds_livro: 'Meu livro'}, transaction);
+        return lib.mssql.databaseOperation.insert(scripts.insertRecord, {ds_livro: 'Meu livro'}, transaction);
 
     }).then((data) => {
 
@@ -104,7 +114,32 @@ function insertOneRecord() {
 
 function insertListRecords() {
 
-    // todo - necesśario implementar.
+    return lib.mssql.transactionFactory.createTransaction(connection).then((t) => {
+
+        console.log('Transaction established.');
+
+        transaction = t;
+
+        let params = [
+            {ds_livro: 'Meu livro'},
+            {ds_livro: 'Meu livro'},
+            {ds_livro: 'Meu livro'},
+            {ds_livro: 'Meu livro'}
+        ];
+
+        return lib.mssql.databaseOperation.insert(scripts.insertRecord, params, transaction);
+
+    }).then((data) => {
+
+        console.log('Records are inserted.');
+
+        return lib.mssql.transactionFactory.commitTransaction(transaction).then(() => {
+
+            return data;
+
+        });
+
+    });
 }
 
 function getOneRecord(filter) {
@@ -116,6 +151,26 @@ function getOneRecord(filter) {
         transaction = t;
 
         return lib.mssql.databaseOperation.getObject(scripts.getRecord, filter, transaction);
+
+    }).then((data) => {
+
+        console.log('Loaded record is: %j', data);
+
+        return lib.mssql.transactionFactory.commitTransaction(transaction);
+
+    });
+
+}
+
+function getListRecords() {
+
+    return lib.mssql.transactionFactory.createTransaction(connection).then((t) => {
+
+        console.log('Transaction established.');
+
+        transaction = t;
+
+        return lib.mssql.databaseOperation.getList(scripts.getList, null, transaction);
 
     }).then((data) => {
 

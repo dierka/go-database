@@ -27,7 +27,7 @@ module.exports = {
         sqlCommand: `
         
             insert into dbo.livro (ds_livro)
-            output inserted.id_livro
+            output inserted.*
             values (@ds_livro)
             
         `,
@@ -55,6 +55,18 @@ module.exports = {
                 type: mssql.Int
             }
         ]
+    },
+
+    getList: {
+        sqlCommand: `
+        
+            select
+                id_livro,
+                ds_livro
+            from dbo.livro
+            
+        `,
+        parameters: []
     }
 
 };
