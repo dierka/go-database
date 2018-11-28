@@ -2,7 +2,7 @@
   "name": "go-database",
   "version": "1.0.0",
   "description": "Database connection factory",
-  "main": "./src/bin/odin-database.js",
+  "main": "./src/bin/go-database.js",
   "directories": {
     "lib": "/src/lib"
   },
