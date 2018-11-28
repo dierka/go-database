@@ -2,9 +2,9 @@
   "name": "go-database",
   "version": "1.0.1",
   "description": "Database connection factory",
-  "main": "./src/bin/go-database.js",
-  "directories": {
-    "lib": "/src/lib"
+  "main": "./src/lib/index.js",
+  "bin": {
+    "go-database": "./src/bin/go-database.js"
   },
   "repository": {
     "type": "git",
