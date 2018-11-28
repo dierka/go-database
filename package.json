@@ -1,6 +1,6 @@
 {
   "name": "go-database",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Database connection factory",
   "main": "./src/bin/go-database.js",
   "directories": {
