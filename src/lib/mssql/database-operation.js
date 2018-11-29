@@ -4,7 +4,7 @@ module.exports = {
 
     executeInstruction(sqlInstruction, parameters, transaction) {
 
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
 
             let statement = new mssql.PreparedStatement(transaction);
 
@@ -38,13 +38,13 @@ module.exports = {
 
                 }).catch((err) => {
 
-                    return reject(err);
+                    throw Error(err);
 
                 });
 
             }).catch((err) => {
 
-                return reject(err);
+                throw Error(err);
 
             })
 
@@ -54,17 +54,17 @@ module.exports = {
 
     getObject(sqlInstruction, parameters, transaction) {
 
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
 
             this.executeInstruction(sqlInstruction, parameters, transaction).then((data) => {
 
                 if (data.length == 0 || data[0].recordset.length == 0) {
 
-                    return reject('Nenhum resultado.');
+                    throw Error('Nenhum resultado.');
 
                 } else if (data.length > 1 || data[0].recordset.length > 1) {
 
-                    return reject('Encontrado mais de um resultado.');
+                    throw Error('Encontrado mais de um resultado.');
 
                 } else {
 
@@ -74,7 +74,7 @@ module.exports = {
 
             }).catch((err) => {
 
-                return reject(err);
+                throw Error(err);
 
             });
 
@@ -84,7 +84,7 @@ module.exports = {
 
     getList(sqlInstruction, parameters, transaction) {
 
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
 
             return this.executeInstruction(sqlInstruction, parameters, transaction).then((data) => {
 
@@ -102,7 +102,7 @@ module.exports = {
 
             }).catch((err) => {
 
-                return reject(err);
+                throw Error(err);
 
             });
 
@@ -112,7 +112,7 @@ module.exports = {
 
     insert(sqlInstruction, parameters, transaction) {
 
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
 
             this.executeInstruction(sqlInstruction, parameters, transaction).then((data) => {
 
@@ -130,7 +130,7 @@ module.exports = {
 
             }).catch((err) => {
 
-                return reject(err);
+                throw Error(err);
 
             })
 

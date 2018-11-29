@@ -6,7 +6,7 @@ module.exports = {
 
         let connection = global['odin-database-connection'];
 
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
 
             try {
 
@@ -20,7 +20,7 @@ module.exports = {
 
                     }).catch((err) => {
 
-                        return reject(err);
+                        throw Error(err);
 
                     });
 
@@ -38,14 +38,14 @@ module.exports = {
                     }
 
                     console.error("Não foi possível obter a transação.", err);
-                    return reject("Não foi possível obter a transação.");
+                    throw Error("Não foi possível obter a transação.");
 
                 });
 
             } catch (err) {
 
                 console.error("Não foi possível obter a transação.", err);
-                return reject("Não foi possível obter a transação.");
+                throw Error("Não foi possível obter a transação.");
 
             }
 
@@ -55,14 +55,14 @@ module.exports = {
 
     isAlive(transaction) {
 
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
 
             try {
 
                 transaction.begin((err) => {
                     if (err) {
 
-                        return reject(err);
+                        throw Error(err);
 
                     } else {
 
@@ -70,7 +70,7 @@ module.exports = {
 
                             if (err) {
 
-                                return reject(err);
+                                throw Error(err);
 
                             } else {
 
@@ -87,7 +87,7 @@ module.exports = {
 
             } catch (err) {
 
-                return reject(err);
+                throw Error(err);
 
             }
 

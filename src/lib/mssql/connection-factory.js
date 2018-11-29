@@ -4,7 +4,7 @@ module.exports = {
 
     createConnection(dbConfig) {
 
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
 
             new mssql.ConnectionPool(dbConfig).connect().then((pool) => {
 
@@ -17,7 +17,7 @@ module.exports = {
             }).catch((err) => {
 
                 console.error("Não foi possivel se conectar ao banco de dados.", err);
-                return reject("Não foi possivel se conectar ao banco de dados.");
+                throw Error("Não foi possivel se conectar ao banco de dados.");
 
             });
 
@@ -28,7 +28,7 @@ module.exports = {
 
         let connection = global['odin-database-connection'];
 
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
 
             try {
                 connection.close();
@@ -36,7 +36,7 @@ module.exports = {
                 return resolve();
             } catch (err) {
                 console.error("Não foi possível fechar a conexão.", err);
-                return reject("Não foi possível fechar a conexão.");
+                throw Error("Não foi possível fechar a conexão.");
             }
         });
 
