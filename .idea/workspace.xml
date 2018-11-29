@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="64216333-e1fb-4a65-9440-b7073803641c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/go-database.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/mssql/connection-factory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/mssql/connection-factory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/mssql/database-operation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/mssql/database-operation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/mssql/transaction-factory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/mssql/transaction-factory.js" afterDir="false" />
-    </list>
+    <list default="true" id="64216333-e1fb-4a65-9440-b7073803641c" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -229,12 +221,12 @@
       <option name="presentableId" value="Default" />
       <updated>1543445787222</updated>
       <workItem from="1543445791259" duration="1815000" />
-      <workItem from="1543451446797" duration="210000" />
+      <workItem from="1543451446797" duration="347000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2025000" />
+    <option name="totallyTimeSpent" value="2162000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="53" y="25" width="1313" height="743" extended-state="6" />
@@ -255,9 +247,9 @@
       <window_info anchor="bottom" id="Docker" order="8" />
       <window_info anchor="bottom" id="SonarLint" order="9" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32993197" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="13" />
+      <window_info anchor="bottom" id="Version Control" order="13" weight="0.32993197" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
