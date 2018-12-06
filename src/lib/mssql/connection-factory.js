@@ -24,6 +24,12 @@ module.exports = {
         });
     },
 
+    getConnection() {
+
+        return global['odin-database-connection'];
+
+    },
+
     closeConnection() {
 
         let connection = global['odin-database-connection'];
