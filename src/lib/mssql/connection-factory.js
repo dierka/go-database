@@ -6,11 +6,11 @@ module.exports = {
 
         return new Promise((resolve, reject) => {
 
-            new mssql.ConnectionPool(dbConfig).connect().then((pool) => {
+            new mssql.ConnectionPool(dbConfig).connect().then((connection) => {
 
                 console.debug("Conectado ao banco de dados.");
 
-                global['odin-database-connection'] = pool;
+                global['go-database-connection'] = connection;
 
                 return resolve();
 
@@ -26,13 +26,13 @@ module.exports = {
 
     getConnection() {
 
-        return global['odin-database-connection'];
+        return global['go-database-connection'];
 
     },
 
     closeConnection() {
 
-        let connection = global['odin-database-connection'];
+        let connection = global['go-database-connection'];
 
         return new Promise((resolve, reject) => {
 

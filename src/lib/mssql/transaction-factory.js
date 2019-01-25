@@ -4,7 +4,7 @@ module.exports = {
 
     createTransaction(retry = true) {
 
-        let connection = global['odin-database-connection'];
+        let connection = global['go-database-connection'];
 
         return new Promise((resolve, reject) => {
 
@@ -30,7 +30,7 @@ module.exports = {
 
                         connectionFactory.createConnection(connection.config).then(() => {
 
-                            connection = global['odin-database-connection'];
+                            connection = global['go-database-connection'];
 
                             return resolve(getTransaction(connection, false));
                         });
