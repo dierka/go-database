@@ -38,13 +38,21 @@ module.exports = {
 
                 }).catch((err) => {
 
-                    return reject(err);
+                    preparedStatement.unprepare().then(() => {
+
+                        return reject(err);
+
+                    });
 
                 });
 
             }).catch((err) => {
 
-                return reject(err);
+                preparedStatement.unprepare().then(() => {
+
+                    return reject(err);
+
+                });
 
             })
 
