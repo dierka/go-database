@@ -25,16 +25,16 @@ module.exports = {
                 return parameters.reduce((promiseChain, parameter) => {
                     return promiseChain.then(chainResults =>
                         preparedStatement.execute(parameter).then(result =>
-                            [ ...chainResults, result ]
+                            [...chainResults, result]
                         )
                     );
                 }, Promise.resolve([])).then(arrayOfResults => {
 
-                        preparedStatement.unprepare().then(() => {
+                    preparedStatement.unprepare().then(() => {
 
-                            return resolve(arrayOfResults);
+                        return resolve(arrayOfResults);
 
-                        });
+                    });
 
                 }).catch((err) => {
 
@@ -48,11 +48,7 @@ module.exports = {
 
             }).catch((err) => {
 
-                preparedStatement.unprepare().then(() => {
-
-                    return reject(err);
-
-                });
+                return reject(err);
 
             })
 
