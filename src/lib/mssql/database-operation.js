@@ -98,10 +98,6 @@ module.exports = {
                     output.push(...a.recordset)
                 });
 
-                if (output.length == 1) {
-                    output = output[0];
-                }
-
                 return resolve(output);
 
             }).catch((err) => {
